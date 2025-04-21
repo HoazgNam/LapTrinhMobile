@@ -2,7 +2,7 @@ void main(){
   for (var i = 1; i<= 5; i++){
     print(i);
   }
-  var names =['luong','duong thanh','dat'];
+  var names =['luu','hoang','nam'];
   for (var name in names){
     print(name);
   }
