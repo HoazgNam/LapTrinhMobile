@@ -27,7 +27,7 @@ void main(){
 
   var y = tinhtong(1, 10, 100);
   print(y);
-  var fn = createFullName(ho: 'Luong', chuLot: 'Duong', ten: 'Dat');
+  var fn = createFullName(ho: 'Luu', chuLot: 'Hoang', ten: 'Nam');
   print(fn);
 
   print(sum(10));
