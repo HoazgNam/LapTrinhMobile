@@ -22,13 +22,13 @@ class NoteAPIService {
           final data = jsonDecode(response.body);
           return Note.fromMap(data);
         } catch (e) {
-          throw Exception('Lỗi parse JSON khi tạo ghi chú: ${e.toString()}');
+          throw Exception('Dữ liệu phản hồi không hợp lệ khi tạo ghi chú: ${e.toString()}');
         }
       } else {
-        throw Exception('Phản hồi rỗng từ server khi tạo ghi chú');
+        throw Exception('Máy chủ không trả về dữ liệu khi tạo ghi chú');
       }
     } else {
-      throw Exception('Lỗi tạo ghi chú: ${response.statusCode} - ${response.body}');
+      throw Exception('Tạo ghi chú thất bại với mã trạng thái: ${response.statusCode} - ${response.body}');
     }
   }
 
@@ -41,10 +41,10 @@ class NoteAPIService {
         final data = jsonDecode(response.body);
         return List<Note>.from(data.map((e) => Note.fromMap(e)));
       } catch (e) {
-        throw Exception('Lỗi parse danh sách ghi chú: ${e.toString()}');
+        throw Exception('Dữ liệu danh sách ghi chú không hợp lệ: ${e.toString()}');
       }
     } else {
-      throw Exception('Lỗi tải ghi chú: ${response.statusCode}');
+      throw Exception('Tải ghi chú thất bại với mã trạng thái: ${response.statusCode}');
     }
   }
 
@@ -79,13 +79,13 @@ class NoteAPIService {
         try {
           return Note.fromMap(jsonDecode(response.body));
         } catch (e) {
-          throw Exception('Lỗi parse JSON khi cập nhật: ${e.toString()}\nDữ liệu: ${response.body}');
+          throw Exception('Không thể phân tích dữ liệu cập nhật: ${e.toString()}\nDữ liệu: ${response.body}');
         }
       } else {
-        throw Exception('Phản hồi rỗng sau khi cập nhật');
+        throw Exception('Server không phản hồi sau thao tác cập nhật');
       }
     } else {
-      throw Exception('Lỗi cập nhật ghi chú: ${response.statusCode} - ${response.body}');
+      throw Exception('Thao tác cập nhật bị từ chối: ${response.statusCode} - ${response.body}');
     }
   }
 
