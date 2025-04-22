@@ -24,7 +24,7 @@ class _NoteFormState extends State<NoteForm> {
   final _contentController = TextEditingController();
   final _tagsController = TextEditingController();
   final _colorController = TextEditingController();
-  int _priority = 2;  // Đảm bảo giá trị mặc định hợp lệ (1, 2, 3)
+  int _priority = 2;
 
   @override
   void initState() {
@@ -63,9 +63,8 @@ class _NoteFormState extends State<NoteForm> {
       }
 
       // Đảm bảo priority có giá trị hợp lệ
-      final priority = (_priority != 0) ? _priority : 2; // Nếu _priority = 0, set lại thành 2 (Trung bình)
+      final priority = (_priority != 0) ? _priority : 2;
 
-      // Nếu createdAt hoặc modifiedAt là null, gán giá trị mặc định
       final createdAt = widget.note?.createdAt ?? now;
       final modifiedAt = now;
 
@@ -73,8 +72,8 @@ class _NoteFormState extends State<NoteForm> {
         id: widget.note?.id,
         title: _titleController.text.trim(),
         content: _contentController.text.trim(),
-        priority: priority, // Gán đúng priority
-        createdAt: createdAt,  // Gán thời gian hiện tại nếu không có
+        priority: priority,
+        createdAt: createdAt,
         modifiedAt: modifiedAt,
         tags: _tagsController.text
             .split(',')
@@ -170,7 +169,7 @@ class _NoteFormState extends State<NoteForm> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Nếu đang chỉnh sửa, hiển thị ngày tạo và ngày cập nhật
+
               if (isEditing) ...[
                 const Divider(),
                 Text(

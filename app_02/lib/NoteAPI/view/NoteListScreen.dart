@@ -81,14 +81,12 @@ class _NoteListScreenState extends State<NoteListScreen> {
   }
 
   Future<void> _handleLogout() async {
-    // Xóa dữ liệu người dùng
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
-    // Kiểm tra xem widget có còn được gắn kết không
     if (!mounted) return;
 
-    // Điều hướng trở lại màn hình đăng nhập và xóa tất cả các màn hình trước đó
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginScreenNote()),
           (Route<dynamic> route) => false,

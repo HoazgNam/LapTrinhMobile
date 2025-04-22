@@ -32,7 +32,6 @@ class NoteAPIService {
     }
   }
 
-  // Lấy tất cả ghi chú
   Future<List<Note>> getAllNotes() async {
     final response = await http.get(Uri.parse('$baseUrl/notes.php'));
 
@@ -48,23 +47,20 @@ class NoteAPIService {
     }
   }
 
-  // Lấy ghi chú theo userId
   Future<List<Note>> getNotesByUser(int userId) async {
     final allNotes = await getAllNotes();
     return allNotes.where((note) => note.userId == userId).toList();
   }
 
-  // Lấy 1 ghi chú theo ID
   Future<Note?> getNoteById(int id) async {
     final notes = await getAllNotes();
     try {
       return notes.firstWhere((n) => n.id == id);
     } catch (e) {
-      return null; // Trả về null nếu không tìm thấy ghi chú
+      return null;
     }
   }
 
-  // Cập nhật ghi chú
   Future<Note> updateNote(Note note) async {
     final response = await http.post(
       Uri.parse('$baseUrl/notes.php?id=${note.id}&_method=PUT'),
@@ -72,7 +68,7 @@ class NoteAPIService {
       body: jsonEncode(note.toMap()),
     );
 
-    print('Phản hồi khi cập nhật: ${response.body}'); //
+    print('Phản hồi khi cập nhật: ${response.body}');
 
     if (response.statusCode == 200) {
       if (response.body.isNotEmpty) {
@@ -89,7 +85,6 @@ class NoteAPIService {
     }
   }
 
-  // Xoá ghi chú
   Future<bool> deleteNote(int id) async {
     final response = await http.post(
       Uri.parse('$baseUrl/notes.php?id=$id&_method=DELETE'),
@@ -97,7 +92,6 @@ class NoteAPIService {
     return response.statusCode == 200 || response.statusCode == 204;
   }
 
-  // Tìm kiếm ghi chú
   Future<List<Note>> searchNotes(String keyword, {int? userId}) async {
     final allNotes = await getAllNotes();
     return allNotes.where((note) {

@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class Note {
-  int? id; // ID ghi chú
-  String title; // Tiêu đề
-  String content; // Nội dung
-  int priority; // 1: Thấp, 2: Trung bình, 3: Cao
-  DateTime createdAt; // Ngày tạo
-  DateTime modifiedAt; // Ngày cập nhật
-  List<String>? tags; // Nhãn
-  String? color; // Màu sắc
-  int userId; // Thêm userId để liên kết với người dùng
+  int? id;
+  String title;
+  String content;
+  int priority;
+  DateTime createdAt;
+  DateTime modifiedAt;
+  List<String>? tags;
+  String? color;
+  int userId;
 
   Note({
     this.id,
@@ -20,7 +20,7 @@ class Note {
     required this.modifiedAt,
     this.tags,
     this.color,
-    required this.userId, // Bắt buộc truyền khi tạo note
+    required this.userId,
   });
 
   Map<String, dynamic> toData() {
@@ -33,7 +33,7 @@ class Note {
       'modifiedAt': modifiedAt.toIso8601String(),
       'tags': tags?.join(','),
       'color': color,
-      'userId': userId, // Thêm khi gửi lên API
+      'userId': userId,
     };
   }
 
@@ -42,23 +42,22 @@ class Note {
   String toJSON() => jsonEncode(toData());
 
   factory Note.fromMap(Map<String, dynamic> map) {
-    // Kiểm tra ngày tháng có hợp lệ không trước khi parse
     DateTime parseDate(String? dateStr) {
-      if (dateStr == null || dateStr.isEmpty) return DateTime.now(); // Nếu ngày rỗng, trả về ngày hiện tại
+      if (dateStr == null || dateStr.isEmpty) return DateTime.now();
       try {
-        return DateTime.parse(dateStr); // Thử parse nếu có thể
+        return DateTime.parse(dateStr);
       } catch (e) {
-        return DateTime.now(); // Nếu có lỗi, trả về ngày hiện tại
+        return DateTime.now();
       }
     }
 
     return Note(
-      id: map['id'] != null ? int.tryParse(map['id'].toString()) : null, // An toàn với ID
+      id: map['id'] != null ? int.tryParse(map['id'].toString()) : null,
       title: map['title'] ?? '',
       content: map['content'] ?? '',
       priority: map['priority'] != null ? int.tryParse(map['priority'].toString()) ?? 0 : 0,
-      createdAt: parseDate(map['createdAt']), // Dùng hàm parseDate để xử lý ngày tạo
-      modifiedAt: parseDate(map['modifiedAt']), // Dùng hàm parseDate để xử lý ngày sửa
+      createdAt: parseDate(map['createdAt']),
+      modifiedAt: parseDate(map['modifiedAt']),
       tags: map['tags'] != null
           ? (map['tags'] is List
           ? List<String>.from(map['tags'])

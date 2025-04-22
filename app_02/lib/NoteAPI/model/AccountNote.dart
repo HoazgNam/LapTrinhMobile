@@ -19,7 +19,6 @@ class AccountNote {
     required this.createdAt,
   });
 
-  // Tạo Account từ Map (ép kiểu int an toàn)
   factory AccountNote.fromMap(Map<String, dynamic> map) {
     return AccountNote(
       id: int.tryParse(map['id'].toString()),
@@ -55,7 +54,6 @@ class AccountNote {
     return jsonEncode(toMap());
   }
 
-  // Tạo bản sao của Account với một số thuộc tính được cập nhật
   AccountNote copyWith({
     int? id,
     int? userId,

@@ -11,7 +11,6 @@ class AccountNoteAPIService {
 
   AccountNoteAPIService._init();
 
-  // Create - Thêm account mới
   Future<AccountNote> createAccount(AccountNote account) async {
     final response = await http.post(
       Uri.parse('$baseUrl/accounts.php'),
@@ -26,7 +25,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Read - Đọc tất cả accounts
   Future<List<AccountNote>> getAllAccounts() async {
     final response = await http.get(Uri.parse('$baseUrl/accounts.php'));
 
@@ -38,7 +36,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Read - Đọc account theo id
   Future<AccountNote?> getAccountById(int id) async {
     final accounts = await getAllAccounts();
     try {
@@ -48,7 +45,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Read - Đọc account theo userId
   Future<AccountNote?> getAccountByUserId(int userId) async {
     final accounts = await getAllAccounts();
     try {
@@ -58,7 +54,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Update - Cập nhật account
   Future<AccountNote> updateAccount(AccountNote account) async {
     final response = await http.post(
       Uri.parse('$baseUrl/accounts.php?id=${account.id}&_method=PUT'),
@@ -73,7 +68,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Delete - Xoá account
   Future<bool> deleteAccount(int id) async {
     final response = await http.post(
       Uri.parse('$baseUrl/accounts.php?id=$id&_method=DELETE'),
@@ -86,13 +80,11 @@ class AccountNoteAPIService {
     }
   }
 
-  // Đếm số lượng accounts
   Future<int> countAccounts() async {
     final accounts = await getAllAccounts();
     return accounts.length;
   }
 
-  // Đăng nhập - Xác thực tài khoản
   Future<AccountNote?> login(String username, String password) async {
     final accounts = await getAllAccounts();
     try {
@@ -110,7 +102,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Patch - Cập nhật một phần thông tin account
   Future<AccountNote> patchAccount(int id, Map<String, dynamic> data) async {
     final response = await http.post(
       Uri.parse('$baseUrl/accounts.php?id=$id&_method=PATCH'),
@@ -125,7 +116,6 @@ class AccountNoteAPIService {
     }
   }
 
-  // Đổi mật khẩu
   Future<AccountNote> changePassword(
       int id,
       String oldPassword,
@@ -139,19 +129,16 @@ class AccountNoteAPIService {
     return await patchAccount(id, {'password': newPassword});
   }
 
-  // Reset mật khẩu
   Future<AccountNote> resetPassword(int id) async {
     final newPass = 'Reset${DateTime.now().millisecondsSinceEpoch.toString().substring(9)}';
     return await patchAccount(id, {'password': newPass, 'status': 'active'});
   }
 
-  // Lấy danh sách tài khoản theo trạng thái
   Future<List<AccountNote>> getAccountsByStatus(String status) async {
     final accounts = await getAllAccounts();
     return accounts.where((a) => a.status == status).toList();
   }
 
-  // Kiểm tra tài khoản tồn tại
   Future<bool> isUsernameExists(String username) async {
     final accounts = await getAllAccounts();
     return accounts.any((a) => a.username == username);
