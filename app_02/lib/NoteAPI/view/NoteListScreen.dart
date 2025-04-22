@@ -3,20 +3,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/Note.dart';
 import '../API/NoteAPIService.dart';
 import 'NoteForm.dart';
-import 'NoteListItem.dart';
+import 'NoteItem.dart';
 import 'NoteDetailScreen.dart';
 import 'LoginScreenNote.dart';
 
-class NoteListScreenAPI extends StatefulWidget {
+class NoteListScreen extends StatefulWidget {
   final Function? onLogout;
 
-  const NoteListScreenAPI({this.onLogout, Key? key}) : super(key: key);
+  const NoteListScreen({this.onLogout, Key? key}) : super(key: key);
 
   @override
   _NoteListScreenState createState() => _NoteListScreenState();
 }
 
-class _NoteListScreenState extends State<NoteListScreenAPI> {
+class _NoteListScreenState extends State<NoteListScreen> {
   late Future<List<Note>> _notesFuture = Future.value([]);
   final TextEditingController _searchController = TextEditingController();
   final Set<int> _selectedNoteIds = {};
@@ -225,7 +225,7 @@ class _NoteListScreenState extends State<NoteListScreenAPI> {
                 onLongPress: () => _toggleSelection(note.id!),
                 child: Container(
                   color: isSelected ? Colors.grey[300] : null,
-                  child: NoteListItem(
+                  child: NoteItem(
                     note: note,
                     onEdit: () async {
                       final updatedNote = await Navigator.push(

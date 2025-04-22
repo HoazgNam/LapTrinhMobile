@@ -175,12 +175,12 @@ class _NoteFormState extends State<NoteForm> {
                 const Divider(),
                 Text(
                   'Ngày tạo: ${formatter.format(widget.note!.createdAt)}',
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(color: Colors.red[600]),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   'Cập nhật: ${formatter.format(widget.note!.modifiedAt)}',
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(color: Colors.yellow[600]),
                 ),
                 const SizedBox(height: 16),
               ],

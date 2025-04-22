@@ -4,13 +4,13 @@ import '../model/Note.dart';
 import 'NoteDetailScreen.dart';
 
 // Widget hiển thị từng ghi chú trong danh sách
-class NoteListItem extends StatelessWidget {
+class NoteItem extends StatelessWidget {
   final Note note;
   final VoidCallback onDelete; // Callback khi xoá
   final VoidCallback onEdit;   // Callback khi sửa
   final VoidCallback? onTap;   // Callback khi nhấn vào ghi chú (tuỳ chọn)
 
-  const NoteListItem({
+  const NoteItem({
     Key? key,
     required this.note,
     required this.onDelete,
@@ -22,12 +22,12 @@ class NoteListItem extends StatelessWidget {
   Color _priorityColor(int priority) {
     switch (priority) {
       case 3:
-        return Colors.red.shade100; // Cao
+        return Colors.purple.shade100; // Cao
       case 2:
-        return Colors.orange.shade100; // Trung bình
+        return Colors.deepOrange.shade100; // Trung bình
       case 1:
       default:
-        return Colors.green.shade100; // Thấp
+        return Colors.blue.shade100; // Thấp
     }
   }
 
@@ -73,12 +73,12 @@ class NoteListItem extends StatelessWidget {
           children: [
             IconButton(
               icon: const Icon(Icons.edit),
-              color: Colors.blue.shade700,
+              color: Colors.green.shade700,
               onPressed: onEdit,
             ),
             IconButton(
               icon: const Icon(Icons.delete),
-              color: Colors.red.shade700,
+              color: Colors.yellow.shade700,
               onPressed: () {
                 showDialog(
                   context: context,

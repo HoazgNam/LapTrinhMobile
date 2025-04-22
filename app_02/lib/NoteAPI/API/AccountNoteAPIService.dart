@@ -7,7 +7,7 @@ import '../model/AccountNote.dart';
 class AccountNoteAPIService {
   static final AccountNoteAPIService instance = AccountNoteAPIService._init();
 
-  final String baseUrl = "http://192.168.1.10/notes_db/";
+  final String baseUrl = "http://172.21.1.182/notes_db";
 
   AccountNoteAPIService._init();
 

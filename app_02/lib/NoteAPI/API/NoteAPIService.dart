@@ -4,7 +4,7 @@ import 'package:app_02/NoteAPI/model/Note.dart';
 
 class NoteAPIService {
   static final NoteAPIService instance = NoteAPIService._init();
-  final String baseUrl = 'http://192.168.1.10/notes_db';
+  final String baseUrl = 'http://172.21.1.182/notes_db';
 
   NoteAPIService._init();
 

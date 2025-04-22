@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app_02/NoteAPI/view/LoginScreenNote.dart';
-import 'package:app_02/NoteAPI/view/NoteListScreenAPI.dart';
+import 'package:app_02/NoteAPI/view/NoteListScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,7 @@ class _AuthCheckWidget extends StatelessWidget {
         final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
 
         if (isLoggedIn) {
-          return NoteListScreenAPI(
+          return NoteListScreen(
             onLogout: () async {
               final prefs = await SharedPreferences.getInstance();
               await prefs.clear();
